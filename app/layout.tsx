@@ -1,6 +1,8 @@
 import '@styles/globals.css';
 import { ReactNode } from 'react';
 
+import Nav from '@components/Nav';
+
 export const metadata = {
     title:"PromptHub",
     description: 'Share & Discover AI Prompts'
@@ -17,6 +19,7 @@ const RootLayout =({children} : RootLayoutProps) => {
                 <div className='gradient'/>
             </div>
             <main className='app'>
+                <Nav />
                 {children}
             </main>
         </body>
