@@ -29,12 +29,12 @@ const Nav = () => {
     }
     return (<nav className='flex-between w-full mb-16 pt-3'>
         <Link href='/' className='flex gap-2 flex-center'>
-            <Image src="assets/images/logo.svg" alt='logo'
+            <Image src="/assets/images/logo.png" alt='logo'
                 width={30}
                 height={30}
                 className='object-contain' />
 
-            <p className='logo_text'>PromptHub</p>
+            <p className='logo_text'>PromptPeak</p>
         </Link>
 
         {/* Desktop Navbar */}
@@ -53,7 +53,7 @@ const Nav = () => {
 
                     <Link href="/Profile">
                         <Image
-                            src="/assets/images/logo.svg"
+                            src="/assets/images/logo.png"
                             width={37}
                             height={37}
                             className='rounded-full'
@@ -83,7 +83,7 @@ const Nav = () => {
                 <div className='flex'>
                     {/* drop down menu */}
                     <Image
-                        src="/assets/images/logo.svg"
+                        src="/assets/images/logo.png"
                         width={37}
                         height={37}
                         className='rounded-full'

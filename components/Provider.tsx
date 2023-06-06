@@ -7,13 +7,14 @@ import React, { ReactNode } from "react";
 
 export type ProviderProps = {
     children : ReactNode | null | undefined;
-    session : Session | null | undefined;
+    session ?: Session | null | undefined;
 }
 
 const Provider = ({children,session} : ProviderProps) => {
+    return (
     <SessionProvider session={session}>
         {children}
-    </SessionProvider>
+    </SessionProvider>)
 }
 
 export default Provider;

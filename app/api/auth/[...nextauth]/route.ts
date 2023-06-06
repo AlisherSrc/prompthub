@@ -6,8 +6,8 @@ import { SessionOptions } from "http2";
 const handler = NextAuth({
     providers: [
         GoogleProvider({
-            clientId: '',
-            clientSecret: '',
+            clientId: process.env.GOOGLE_ID ?? "",
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
         })
     ],
 
@@ -19,3 +19,5 @@ const handler = NextAuth({
     // }
 
 })
+
+export default handler;
