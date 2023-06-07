@@ -3,6 +3,7 @@ import GoogleProvider from 'next-auth/providers/google';
 import { Session } from "next-auth";
 import { SessionOptions } from "http2";
 
+
 const handler = NextAuth({
     providers: [
         GoogleProvider({
@@ -11,13 +12,13 @@ const handler = NextAuth({
         })
     ],
 
-    // async session({session} : {}){
+    async session({session} : {}){
 
-    // },
+    },
     // async signIn({profile}){
         
     // }
 
 })
 
-export default handler;
+export {handler as GET, handler as POST};
