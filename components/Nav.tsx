@@ -8,7 +8,7 @@ import { BuiltInProviderType } from 'next-auth/providers';
 
 
 const Nav = () => {
-    const isUserLoggedIn: boolean = true;
+    const {data : session} = useSession(); 
 
     const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
     const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const Nav = () => {
         {/* Desktop Navbar */}
 
         <div className='sm:flex hidden'>
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className='flex gap-3 md:gap-5'>
                     <Link href="/create-prompt"
                         className='black_btn'>
@@ -53,7 +53,7 @@ const Nav = () => {
 
                     <Link href="/Profile">
                         <Image
-                            src="/assets/images/logo.png"
+                            src={session.user.image ?? "/assets/images/logo.png"}
                             width={37}
                             height={37}
                             className='rounded-full'
@@ -79,11 +79,11 @@ const Nav = () => {
 
         {/* Mobile Navbar */}
         <div className='sm:hidden flex relative'>
-            {isUserLoggedIn ? (
+            {session?.user ? (
                 <div className='flex'>
                     {/* drop down menu */}
                     <Image
-                        src="/assets/images/logo.png"
+                        src={session.user.image ?? "/assets/images/logo.png"}
                         width={37}
                         height={37}
                         className='rounded-full'
@@ -91,8 +91,14 @@ const Nav = () => {
                         onClick={() => { setToggleDropdown((prev) => !prev) }}
                     />
 
-                    {toggleDropdown && (
+                    {session?.user && (
                         <div className='dropdown'>
+                            <Link
+                                href="/profile"
+                                className='dropdown_link'
+                                onClick={() => setToggleDropdown(false)}>
+                                    My Profile
+                            </Link>
                             <Link
                                 href="/create-prompt"
                                 className='dropdown_link'
