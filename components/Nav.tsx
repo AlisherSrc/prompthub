@@ -91,7 +91,7 @@ const Nav = () => {
                         onClick={() => { setToggleDropdown((prev) => !prev) }}
                     />
 
-                    {session?.user && (
+                    {toggleDropdown && (
                         <div className='dropdown'>
                             <Link
                                 href="/profile"
