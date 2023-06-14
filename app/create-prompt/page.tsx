@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 
 import Form from "@components/Form";
 import { Session } from "inspector";
+import { useRouter } from 'next/navigation'
 
 export interface Post{
     prompt: string,
@@ -18,17 +19,21 @@ const CreatePrompt = () => {
         tag: '',
     } as Post);
 
+    const {data : session} = useSession();
+    const router = useRouter();
+
     const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         setSubmitting(true);
 
         try{
+
             const response = await fetch('/api/prompt/new',{
                 method: 'POST',
                 body: JSON.stringify({
                     prompt: post.prompt,
-                    userId: session?.user.id,
+                    userId: session?.user?.id,
                     tag: post.tag
                 })
             })
