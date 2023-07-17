@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-
+import axios from 'axios';
 import Form from "@components/Form";
-import { Session } from "inspector";
 import { useRouter } from 'next/navigation'
 
-export interface Post{
+export interface Post {
     prompt: string,
     tag: string
 }
@@ -19,7 +18,7 @@ const CreatePrompt = () => {
         tag: '',
     } as Post);
 
-    const {data : session} = useSession();
+    const { data: session } = useSession();
     const router = useRouter();
 
     const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -27,27 +26,22 @@ const CreatePrompt = () => {
 
         setSubmitting(true);
 
-        try{
+        try {
+            const response = await axios.post('/api/prompt/new', {
+                userId: session?.user?.id,
+                prompt: post.prompt,
+                tag: post.tag
+            });
 
-            const response = await fetch('/api/prompt/new',{
-                method: 'POST',
-                body: JSON.stringify({
-                    prompt: post.prompt,
-                    userId: session?.user?.id,
-                    tag: post.tag
-                })
-            })
-
-            if(response.ok){
+            if (response.status === 201) {
                 router.push('/');
             }
-        }catch(error){
+        } catch (error) {
             console.log(error);
-        }finally{
+        } finally {
             setSubmitting(false);
         }
     }
-
 
     return (
         <Form

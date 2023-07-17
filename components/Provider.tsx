@@ -10,7 +10,7 @@ export type ProviderProps = {
     session ?: Session | null | undefined;
 }
 
-const Provider = ({children,session} : ProviderProps) => {
+const Provider:React.FC<ProviderProps> = ({children,session}) => {
     return (
     <SessionProvider session={session}>
         {children}
